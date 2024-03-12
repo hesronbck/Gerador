@@ -68,13 +68,33 @@ addEventListener("DOMContentLoaded", () => {
         }
 
         return senha;
-
     }
+    function calcularForcaSenha(senha) {
+        const forca = senha.length;
+        let textoForca;
+        let cor;
+
+        if (forca >= 16) {
+            cor = "green";
+            textoForca = "Forte";
+        } else if (forca >= 10) {
+            cor = "yellow";
+            textoForca = "Média";
+        } else {
+            cor = "red";
+            textoForca = "Fraca";
+        }
+
+        document.getElementById("passwordStrength").innerText = "Força da Senha: " + textoForca;
+        document.getElementById("passwordStrength").style.color = cor;
+    }
+
     var textSenha = document.getElementById("output");
     const clique = document.getElementById("generate");
     clique.addEventListener("click", function () {
         const senhaGerada = gerarSenha();
         textSenha.innerText = senhaGerada;
+        calcularForcaSenha(senhaGerada);
 
     });
 
@@ -84,16 +104,6 @@ addEventListener("DOMContentLoaded", () => {
         navigator.clipboard.writeText(textSenha.innerText)
         alert("Texto copiado para a area de transferência: " + textSenha.innerText)
     })
+
 })
-
-
-
-
-
-
-
-
-
-
-
 
